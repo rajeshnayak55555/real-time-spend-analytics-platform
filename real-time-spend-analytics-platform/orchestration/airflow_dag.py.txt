@@ -1,0 +1,17 @@
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from datetime import datetime
+
+with DAG("spend_pipeline", start_date=datetime(2024,1,1), schedule_interval="@daily") as dag:
+
+    kafka_task = BashOperator(
+        task_id="kafka_producer",
+        bash_command="python ingestion/kafka_producer.py"
+    )
+
+    spark_task = BashOperator(
+        task_id="spark_stream",
+        bash_command="spark-submit streaming/spark_streaming_job.py"
+    )
+
+    kafka_task >> spark_task

@@ -1,0 +1,10 @@
+from feast import Entity, FeatureView, Field
+from feast.types import Float32
+
+transaction = Entity(name="user_id", join_keys=["user_id"])
+
+feature_view = FeatureView(
+    name="transaction_features",
+    entities=[transaction],
+    schema=[Field(name="amount", dtype=Float32)]
+)

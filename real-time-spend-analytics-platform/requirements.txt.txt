@@ -1,0 +1,10 @@
+pyspark
+kafka-python
+fastapi
+uvicorn
+scikit-learn
+pandas
+mlflow
+joblib
+apache-airflow
+feast
